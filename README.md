@@ -1,11 +1,7 @@
-<img alt="micro logo" src="./assets/micro-logo-drop.svg" width="500px"/>
+# Micro
 
-![Test Workflow](https://github.com/zyedidia/micro/actions/workflows/test.yaml/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zyedidia/micro)](https://goreportcard.com/report/github.com/zyedidia/micro)
-[![Release](https://img.shields.io/github/release/zyedidia/micro.svg?label=Release)](https://github.com/zyedidia/micro/releases)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zyedidia/micro/blob/master/LICENSE)
-[![Join the chat at https://gitter.im/zyedidia/micro](https://badges.gitter.im/zyedidia/micro.svg)](https://gitter.im/zyedidia/micro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Snap Status](https://snapcraft.io/micro/badge.svg)](https://snapcraft.io/micro)
+![Micro Fork](https://img.shields.io/badge/Micro-Fork)
+![Release](https://img.shields.io/github/release/zyedidia/micro.svg?label=Release)](https://github.com/zyedidia/micro/releases)
 
 **micro** is a terminal-based text editor that aims to be easy to use and intuitive, while also taking advantage of the capabilities
 of modern terminals. It comes as a single, batteries-included, static binary with no dependencies; you can download and use it right now!
@@ -18,24 +14,21 @@ Here is a picture of micro editing its source code.
 ![Screenshot](./assets/micro-solarized.png)
 
 To see more screenshots of micro, showcasing some of the default color schemes, see [here](https://micro-editor.github.io).
- 
+
 You can also check out the website for Micro at https://micro-editor.github.io.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Installation](#installation)
-  - [Prebuilt binaries](#pre-built-binaries)
-  - [Package Managers](#package-managers)
   - [Building from source](#building-from-source)
   - [Fully static binary](#fully-static-binary)
   - [macOS terminal](#macos-terminal)
   - [Linux clipboard support](#linux-clipboard-support)
   - [Colors and syntax highlighting](#colors-and-syntax-highlighting)
-  - [Cygwin, Mingw, Plan9](#cygwin-mingw-plan9)
 - [Usage](#usage)
 - [Documentation and Help](#documentation-and-help)
-- [Contributing](#contributing)
+- [Upstream](#upstream)
 
 - - -
 
@@ -82,81 +75,6 @@ stable version if you install from the prebuilt binaries, Homebrew, or Snap.
 
 A desktop entry file and man page can be found in the [assets/packaging](https://github.com/zyedidia/micro/tree/master/assets/packaging) directory.
 
-### Pre-built binaries
-
-Pre-built binaries are distributed in [releases](https://github.com/zyedidia/micro/releases).
-
-To uninstall micro, simply remove the binary, and the configuration directory at `~/.config/micro`.
-
-#### Quick-install script
-
-```bash
-curl https://getmic.ro | bash
-```
-
-The script will place the micro binary in the current directory. From there, you can move it to a directory on your path of your choosing (e.g. `sudo mv micro /usr/bin`). See its [GitHub repository](https://github.com/benweissmann/getmic.ro) for more information.
-
-#### Eget
-
-With [Eget](https://github.com/zyedidia/eget) installed, you can easily get a pre-built binary:
-
-```
-eget zyedidia/micro
-```
-
-Use `--tag VERSION` to download a specific tagged version.
-
-```
-eget --tag nightly zyedidia/micro # download the nightly version (compiled every day at midnight UTC)
-eget --tag v2.0.8 zyedidia/micro  # download version 2.0.8 rather than the latest release
-```
-
-You can install `micro` by adding `--to /usr/local/bin` to the `eget` command, or move the binary manually to a directory on your `$PATH` after the download completes.
-
-See [Eget](https://github.com/zyedidia/eget) for more information.
-
-### Package managers
-
-You can install micro using Homebrew on Mac:
-
-```
-brew install micro
-```
-
-**Note for Mac:** All micro keybindings use the control or alt (option) key, not the command
-key. By default, macOS terminals do not forward alt key events. To fix this, please see
-the section on [macOS terminals](https://github.com/zyedidia/micro#macos-terminal) further below.
-
-On Linux, you can install micro through [snap](https://snapcraft.io/docs/core/install)
-
-```
-snap install micro --classic
-```
-
-Micro is also available through other package managers on Linux such as dnf, AUR, Nix, and package managers
-for other operating systems. These packages are not guaranteed to be up-to-date.
-
-<!-- * `apt install micro` (Ubuntu 20.04 `focal`, and Debian `unstable | testing | buster-backports`). At the moment, this package (2.0.1-1) is outdated and has a known bug where debug mode is enabled. -->
-
-* Linux: Available in distro-specific package managers.
-    * `dnf install micro` (Fedora).
-    * `apt install micro` (Ubuntu and Debian).
-    * `pacman -S micro` (Arch Linux).
-    * `emerge app-editors/micro` (Gentoo).
-    * `zypper install micro-editor` (SUSE)
-    * `eopkg install micro` (Solus).
-    * `pacstall -I micro` (Pacstall).
-    * See [wiki](https://github.com/zyedidia/micro/wiki/Installing-Micro) for details about CRUX, Termux.
-* Windows: [Chocolatey](https://chocolatey.org) and [Scoop](https://github.com/lukesampson/scoop).
-    * `choco install micro`.
-    * `scoop install micro`.
-* OpenBSD: Available in the ports tree and also available as a binary package.
-    * `pkd_add -v micro`.
-* NetBSD, macOS, Linux, Illumos, etc. with [pkgsrc](http://www.pkgsrc.org/)-current:
-    * `pkg_add micro`
-* macOS with [MacPorts](https://www.macports.org):
-    * `sudo port install micro`
-
 **Note for Linux desktop environments:**
 
 For interfacing with the local system clipboard, the following tools need to be installed:
@@ -176,6 +94,14 @@ git clone https://github.com/zyedidia/micro
 cd micro
 make build
 sudo mv micro /usr/local/bin # optional
+```
+
+You could also need:
+
+```
+go get github.com/zyedidia/clipboard
+go get github.com/zyedidia/tcell
+go get github.com/zyedidia/micro/cmd/micro/shellwords
 ```
 
 The binary will be placed in the current directory and can be moved to
@@ -276,13 +202,8 @@ a brief introduction to the more powerful configuration features micro offers.
 
 There is also an unofficial Discord, which you can join at https://discord.gg/nhWR6armnR.
 
-## Contributing
+## Upstream
 
-If you find any bugs, please report them! I am also happy to accept pull requests from anyone.
+Since this is a fork, you might also want to explore ![upstream](https://img.shields.io/badge/Micro-Fork).
 
-You can use the [GitHub issue tracker](https://github.com/zyedidia/micro/issues)
-to report bugs, ask questions, or suggest new features.
-
-For a more informal setting to discuss the editor, you can join the [Gitter chat](https://gitter.im/zyedidia/micro) or the [Discord](https://discord.gg/nhWR6armnR). You can also use the [Discussions](https://github.com/zyedidia/micro/discussions) section on Github for a forum-like setting or for Q&A.
-
-Sometimes I am unresponsive, and I apologize! If that happens, please ping me.
+Please do NOT report any bug there you had with this fork.
