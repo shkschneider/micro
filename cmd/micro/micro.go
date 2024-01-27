@@ -8,11 +8,13 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"regexp"
 	"runtime"
 	"runtime/pprof"
 	"sort"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -147,6 +149,7 @@ func LoadInput(args []string) []*buffer.Buffer {
 	// There are a number of ways micro should start given its input
 
 	// 1. If it is given a files in flag.Args(), it should open those
+	// 1. If it is given a directory in flag.Args(), list files
 
 	// 2. If there is no input file and the input is not a terminal, that means
 	// something is being piped in and the stdin should be opened in an
@@ -198,7 +201,17 @@ func LoadInput(args []string) []*buffer.Buffer {
 		// Option 1
 		// We go through each file and load it
 		for i := 0; i < len(files); i++ {
-			buf, err := buffer.NewBufferFromFileAtLoc(files[i], btype, flagStartPos)
+			var file = files[i]
+			stat, err := os.Stat(files[i])
+			if err == nil && stat.IsDir() {
+				filename, err := shell.RunInteractiveShell("bash -c 'fd \"" + file + "\" | fzf'", false, true)
+				if err != nil {
+					screen.TermMessage(err)
+					continue
+				}
+				file = filepath.Join(file, strings.TrimSpace(filename))
+			}
+			buf, err := buffer.NewBufferFromFileAtLoc(file, btype, flagStartPos)
 			if err != nil {
 				screen.TermMessage(err)
 				continue
