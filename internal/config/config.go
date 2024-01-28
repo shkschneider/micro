@@ -10,14 +10,14 @@ import (
 
 var ConfigDir string
 
-// InitConfigDir finds the configuration directory for micro according to the XDG spec.
+// InitConfigDir finds the configuration directory for macro according to the XDG spec.
 // If no directory is found, it creates one.
 func InitConfigDir(flagConfigDir string) error {
 	var e error
 
-	microHome := os.Getenv("MICRO_CONFIG_HOME")
-	if microHome == "" {
-		// The user has not set $MICRO_CONFIG_HOME so we'll try $XDG_CONFIG_HOME
+	macroHome := os.Getenv("MACRO_CONFIG_HOME")
+	if macroHome == "" {
+		// The user has not set $MACRO_CONFIG_HOME so we'll try $XDG_CONFIG_HOME
 		xdgHome := os.Getenv("XDG_CONFIG_HOME")
 		if xdgHome == "" {
 			// The user has not set $XDG_CONFIG_HOME so we should act like it was set to ~/.config
@@ -28,9 +28,9 @@ func InitConfigDir(flagConfigDir string) error {
 			xdgHome = filepath.Join(home, ".config")
 		}
 
-		microHome = filepath.Join(xdgHome, "micro")
+		macroHome = filepath.Join(xdgHome, "macro")
 	}
-	ConfigDir = microHome
+	ConfigDir = macroHome
 
 	if len(flagConfigDir) > 0 {
 		if _, err := os.Stat(flagConfigDir); os.IsNotExist(err) {
@@ -41,7 +41,7 @@ func InitConfigDir(flagConfigDir string) error {
 		}
 	}
 
-	// Create micro config home directory if it does not exist
+	// Create macro config home directory if it does not exist
 	// This creates parent directories and does nothing if it already exists
 	err := os.MkdirAll(ConfigDir, os.ModePerm)
 	if err != nil {

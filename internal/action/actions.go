@@ -1672,7 +1672,7 @@ func (h *BufPane) QuitAll() bool {
 	}
 
 	if anyModified {
-		InfoBar.YNPrompt("Quit micro? (all open buffers will be closed without saving)", func(yes, canceled bool) {
+		InfoBar.YNPrompt("Quit macro? (all open buffers will be closed without saving)", func(yes, canceled bool) {
 			if !canceled && yes {
 				quit()
 			}

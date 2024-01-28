@@ -1,7 +1,8 @@
 .DS_Store
 
-micro
+macro
 !cmd/micro
+!cmd/macro
 binaries/
 tmp.sh
 test/
@@ -12,8 +13,4 @@ test.txt
 log.txt
 *.old
 benchmark_results*
-tools/build-version
-tools/build-date
-tools/info-plist
-tools/vscode-tests/
 *.hdr

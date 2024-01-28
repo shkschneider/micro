@@ -150,11 +150,7 @@ func Init() error {
 	drawChan = make(chan bool, 8)
 
 	// Should we enable true color?
-	truecolor := os.Getenv("MICRO_TRUECOLOR") == "1"
-
-	if !truecolor {
-		os.Setenv("TCELL_TRUECOLOR", "disable")
-	}
+	// Let tcell trust COLORTERM
 
 	var oldTerm string
 	modifiedTerm := false

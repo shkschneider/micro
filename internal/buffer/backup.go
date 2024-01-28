@@ -14,20 +14,9 @@ import (
 	"golang.org/x/text/encoding"
 )
 
-const backupMsg = `A backup was detected for this file. This likely means that micro
-crashed while editing this file, or another instance of micro is currently
-editing this file.
-
-The backup was created on %s, and the file is
-
-%s
-
-* 'recover' will apply the backup as unsaved changes to the current buffer.
-  When the buffer is closed, the backup will be removed.
-* 'ignore' will ignore the backup, discarding its changes. The backup file
-  will be removed.
-* 'abort' will abort the open operation, and instead open an empty buffer.
-
+const backupMsg = `A backup was detected for %s on %s.
+This likely means that macro crashed while editing this file,
+or another instance of macro is currently editing this file.
 Options: [r]ecover, [i]gnore, [a]bort: `
 
 var backupRequestChan chan *Buffer

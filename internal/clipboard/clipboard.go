@@ -25,7 +25,7 @@ const (
 var CurrentMethod Method = Internal
 
 // A Register is a buffer used to store text. The system clipboard has the 'clipboard'
-// and 'primary' (linux-only) registers, but other registers may be used internal to micro.
+// and 'primary' (linux-only) registers, but other registers may be used internal to macro.
 type Register int
 
 const (
@@ -44,7 +44,7 @@ func Initialize(m Method) error {
 	case External:
 		clips := make([]clipper.Clipboard, 0, len(clipper.Clipboards)+1)
 		clips = append(clips, &clipper.Custom{
-			Name: "micro-clip",
+			Name: "macro-clip",
 		})
 		clips = append(clips, clipper.Clipboards...)
 		clipboard, err = clipper.GetClipboard(clips...)
