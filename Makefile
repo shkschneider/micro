@@ -23,18 +23,18 @@ upgrade: update
 build: generate build-quick
 
 build-quick:
-	go build -trimpath -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./internal/bin/$(NAME)
+	go build -trimpath -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./cmd/$(NAME)
 
 build-dbg:
-	go build -trimpath -ldflags "-s -w $(ADDITIONAL_GO_LINKER_FLAGS) $(DEBUGVAR)" ./internal/bin/$(NAME)
+	go build -trimpath -ldflags "-s -w $(ADDITIONAL_GO_LINKER_FLAGS) $(DEBUGVAR)" ./cmd/$(NAME)
 
 build-tags: fetch-tags generate
-	go build -trimpath -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./internal/bin/$(NAME)
+	go build -trimpath -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./cmd/$(NAME)
 
 build-all: build
 
 install: generate
-	go install -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./internal/bin/$(NAME)
+	go install -ldflags "-s -w $(GOVARS) $(ADDITIONAL_GO_LINKER_FLAGS)" ./cmd/$(NAME)
 	@mkdir -p ~/.local/share/applications/
 	cp -f ./runtime/$(NAME).desktop ~/.local/share/applications/
 

@@ -4,6 +4,7 @@ require (
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/creack/pty v1.1.21 // indirect
 	github.com/dustin/go-humanize v1.0.1
+	github.com/gdamore/encoding v1.0.1 // indirect
 	github.com/go-errors/errors v1.5.1
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
@@ -21,7 +22,7 @@ require (
 	github.com/zyedidia/poller v2.0.0+incompatible // indirect
 	github.com/zyedidia/tcell/v2 v2.0.10
 	github.com/zyedidia/terminal v0.0.0-20230315200948-4b3bcf6dddef
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/text v0.14.0
 	gopkg.in/yaml.v2 v2.4.0
 	layeh.com/gopher-luar v1.0.11
