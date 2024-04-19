@@ -1,7 +1,7 @@
 .PHONY: runtime build generate build-quick
 
 NAME = macro
-VERSION = $(shell git describe --tags)
+VERSION = $(shell git describe --tags | sed 's;^v;;')
 HASH = $(shell git rev-parse --short HEAD)
 DATE = $(shell date +%F)
 ADDITIONAL_GO_LINKER_FLAGS = $(shell GOOS=$(shell go env GOHOSTOS) GOARCH=$(shell go env GOHOSTARCH))
@@ -14,8 +14,11 @@ all: build
 	@file ./$(NAME)
 
 update:
-	@git remote add upstream https://github.com/zyedidia/micro 2>/dev/null
-	git pull --rebase upstream $(shell git rev-parse --abbrev-ref HEAD)
+	@git remote add upstream https://github.com/zyedidia/micro 2>/dev/null || true
+	git pull --rebase upstream master
+
+upgrade: update
+	go get -u ./...
 
 build: generate build-quick
 
